@@ -1,0 +1,15 @@
+pandas
+dash
+regex
+flask
+plotly
+dash-core-components
+dash-html-components
+tweepy
+bs4
+dash-table
+dash-bootstrap-components
+praw
+yfinance
+texthero
+datetime
