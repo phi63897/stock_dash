@@ -13,3 +13,4 @@ praw
 yfinance
 texthero
 datetime
+matplotlib == 3.3.3
