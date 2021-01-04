@@ -1,1 +1,1 @@
-web: gunicorn stock_dash/main:server
+web: gunicorn main:server
