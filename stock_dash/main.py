@@ -252,6 +252,4 @@ def create_graph(ticker,startdate, enddate, n):
         
     return accordion
 
-
-if __name__ == '__main__':
-    app.run_server()
+app.run_server()
