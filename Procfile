@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath stock_dash main:server --preload --timeout 60
+web: gunicorn --pythonpath stock_dash main:server --timeout 120
