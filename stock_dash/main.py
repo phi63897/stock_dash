@@ -16,6 +16,7 @@ import numpy as np
 import praw
 import sqlite3
 import plotly
+import texthero
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from dash_utils import make_table, make_card, ticker_inputs, make_item
