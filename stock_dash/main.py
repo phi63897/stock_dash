@@ -29,6 +29,7 @@ conn = sqlite3.connect('stocks.sqlite')
 #instantiate dash app server using flask for easier hosting
 server = Flask(__name__)
 app = dash.Dash(__name__,server = server ,meta_tags=[{ "content": "width=device-width"}], external_stylesheets=[dbc.themes.BOOTSTRAP])
+server.wsgi_app = WhiteNoise(server.wsgi_app, root=‘static/’)
 #used for dynamic callbacks
 app.config.suppress_callback_exceptions = True
 #get options flow from twitter
