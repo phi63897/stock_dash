@@ -1,44 +1,29 @@
 import pandas as pd
-from bs4 import BeautifulSoup
 import requests
 from datetime import date
+import os
+
 def get_financial_report(ticker):
-    #build URLs
-    urlfinancials = 'https://www.marketwatch.com/investing/stock/'+ticker+'/financials'
-    urlbalancesheet = 'https://www.marketwatch.com/investing/stock/'+ticker+'/financials/balance-sheet'
-    #request the data using beautiful soup
-    text_soup_financials = BeautifulSoup(requests.get(urlfinancials).text,"html") #read in
-    text_soup_balancesheet = BeautifulSoup(requests.get(urlbalancesheet).text,"html") #read in
+    iex_token = os.getenv(iex_token)
+    base_url = "https://cloud.iexapis.com/"
 
-    # build lists for Income statement
-    titlesfinancials = text_soup_financials.findAll('td', {'class': 'rowTitle'})
+    balanceRequest = "stable/stock/{ticker}/balance-sheet?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)
+    balanceSheet = request.get(base_url + balanceRequest)["balancesheet"]
+
+    cashRequest = "stable/stock{ticker}/cash-flow?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)"
+    cashFlow = request.get(base_url + cashRequest)["cashflow"]
+
+    incomeRequest = "stable/stock/{ticker}/income?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)"
+    incomeStatement = request.get(base_url+incomeRequest)["income"]
+
     epslist=[]
-    netincomelist = []
-    longtermdebtlist = [] 
-    interestexpenselist = []
-    ebitdalist= []
+    netincomelist = reverse([incomeStatement["netIncome"] for year in incomeStatement])
+    longtermdebtlist = reverse([balanceSheet["longTermDebt"] for year in balanceSheet])
+    interestincomelist = reverse([incomeStatement["interestIncome"] for year in incomeStatement])
+    ebitlist= reverse([incomeStatement["ebit"] for year in incomeStatement])
 
-    #load data into lists if the row title is found
-    for title in titlesfinancials:
-        if 'EPS (Basic)' in title.text:
-            epslist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
-        if 'Net Income' in title.text:
-            netincomelist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
-        if 'Interest Expense' in title.text:
-            interestexpenselist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
-        if 'EBITDA' in title.text:
-            ebitdalist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
 
-    # find the table headers for the Balance sheet
-    titlesbalancesheet = text_soup_balancesheet.findAll('td', {'class': 'rowTitle'})
-    equitylist=[]
-    for title in titlesbalancesheet:
-        if 'Total Shareholders\' Equity' in title.text:
-            equitylist.append( [td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
-        if 'Long-Term Debt' in title.text:
-            longtermdebtlist.append( [td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
-
-    #get the data from the income statement lists 
+    #get the data from the income statement lists
     #use helper function get_element
     eps = get_element(epslist,0)
     epsGrowth = get_element(epslist,1)
@@ -46,14 +31,15 @@ def get_financial_report(ticker):
     shareholderEquity = get_element(equitylist,0)
     roa = get_element(equitylist,1)
     longtermDebt = get_element(longtermdebtlist,0)
-    interestExpense =  get_element(interestexpenselist,0)
-    ebitda = get_element(ebitdalist,0)
-    # load all the data into dataframe 
-    fin_df= pd.DataFrame({'eps': eps,'eps Growth': epsGrowth,'net Income': netIncome,'shareholder Equity': shareholderEquity,'roa': 
-                  roa,'longterm Debt': longtermDebt,'interest Expense': interestExpense,'ebitda': ebitda},index=range(date.today().year-5,date.today().year))
-    
+    interestIncome =  get_element(interestincomelist,0)
+    ebitda = get_element(ebitlist,0)
+
+    # load all the data into dataframe
+    fin_df= pd.DataFrame({'eps': eps,'eps Growth': epsGrowth,'net Income': netIncome,'shareholder Equity': shareholderEquity,'roa':
+                  roa,'longterm Debt': longtermDebt,'interest income': interestIncome,'ebit': ebit},index=range(date.today().year-5,date.today().year))
+
     fin_df.reset_index(inplace=True)
-    
+
     return fin_df
 def get_element(list,element):
     try:
