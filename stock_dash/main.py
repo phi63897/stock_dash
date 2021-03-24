@@ -221,7 +221,7 @@ def fin_report(sym):
 , Input('interval-component', 'n_intervals')
 ])
 def create_graph(ticker,startdate, enddate, n):
-    ticker = ticker.upper()
+    ticker = ticker.upper() if ticker != None else "MSFT"
     df1 = yf.download(ticker,startdate, enddate)
     df1.reset_index(inplace=True)
         
