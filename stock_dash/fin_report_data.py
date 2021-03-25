@@ -3,7 +3,7 @@ import requests
 from datetime import date
 import os
 def get_financial_report(ticker):
-    iex_token = os.getenv(iex_token)
+    iex_token = os.getenv('iex_token')
     base_url = "https://cloud.iexapis.com/"
 
     balanceRequest = "stable/stock/{ticker}/balance-sheet?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)
