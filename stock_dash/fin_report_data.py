@@ -16,12 +16,12 @@ def get_financial_report(ticker):
     incomeStatement = request.get(base_url+incomeRequest)["income"]
 
     epslist=[None * 5]
-    totalassetlist = reverse([balanceSheet["totalAssets"] for year in balanceSheet])
-    netincomelist = reverse([incomeStatement["netIncome"] for year in incomeStatement])
-    longtermdebtlist = reverse([balanceSheet["longTermDebt"] for year in balanceSheet])
-    interestincomelist = reverse([incomeStatement["interestIncome"] for year in incomeStatement])
-    ebitlist= reverse([incomeStatement["ebit"] for year in incomeStatement])
-    equitylist = reverse([balanceSheet["shareholderEquity"] for year in balanceSheet])
+    totalassetlist = reverse([year["totalAssets"] for year in balanceSheet])
+    netincomelist = reverse([year["netIncome"] for year in incomeStatement])
+    longtermdebtlist = reverse([year["longTermDebt"] for year in balanceSheet])
+    interestincomelist = reverse([year["interestIncome"] for year in incomeStatement])
+    ebitlist= reverse([year["ebit"] for year in incomeStatement])
+    equitylist = reverse([year["shareholderEquity"] for year in balanceSheet])
     roalist = [netincomelist[i]/totalassetlist[i] for i in range(len(totalassetlist))]
 
     #get the data from the income statement lists
