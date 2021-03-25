@@ -32,7 +32,7 @@ def get_financial_report(ticker):
     roa = get_element(equitylist,1)
     longtermDebt = get_element(longtermdebtlist,0)
     interestIncome =  get_element(interestincomelist,0)
-    ebitda = get_element(ebitlist,0)
+    ebit = get_element(ebitlist,0)
 
     # load all the data into dataframe
     fin_df= pd.DataFrame({'eps': eps,'eps Growth': epsGrowth,'net Income': netIncome,'shareholder Equity': shareholderEquity,'roa':
