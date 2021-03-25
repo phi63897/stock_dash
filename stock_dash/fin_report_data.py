@@ -15,25 +15,16 @@ def get_financial_report(ticker):
     incomeRequest = "stable/stock/{ticker}/income?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)
     incomeStatement = request.get(base_url+incomeRequest)["income"]
 
-    epslist=[None * 5]
-    totalassetlist = reverse([year["totalAssets"] for year in balanceSheet])
-    netincomelist = reverse([year["netIncome"] for year in incomeStatement])
-    longtermdebtlist = reverse([year["longTermDebt"] for year in balanceSheet])
-    interestincomelist = reverse([year["interestIncome"] for year in incomeStatement])
-    ebitlist= reverse([year["ebit"] for year in incomeStatement])
-    equitylist = reverse([year["shareholderEquity"] for year in balanceSheet])
-    roalist = [netincomelist[i]/totalassetlist[i] for i in range(len(totalassetlist))]
+    eps=["-" * 5]
+    epsGrowth = ["-" * 5]
+    totalasset = reverse([year["totalAssets"] for year in balanceSheet])
+    netIncome = reverse([year["netIncome"] for year in incomeStatement])
+    longtermDebt = reverse([year["longTermDebt"] for year in balanceSheet])
+    interestIncome = reverse([year["interestIncome"] for year in incomeStatement])
+    ebit= reverse([year["ebit"] for year in incomeStatement])
+    shareholderEquity = reverse([year["shareholderEquity"] for year in balanceSheet])
+    roa = [netIncome[i]/totalasset[i] for i in range(len(totalasset))]
 
-    #get the data from the income statement lists
-    #use helper function get_element
-    eps = get_element(epslist,0)
-    epsGrowth = get_element(epslist,1)
-    netIncome = get_element(netincomelist,0)
-    shareholderEquity = get_element(equitylist,0)
-    roa = get_element(roalist,0)
-    longtermDebt = get_element(longtermdebtlist,0)
-    interestIncome =  get_element(interestincomelist,0)
-    ebit = get_element(ebitlist,0)
 
     # load all the data into dataframe
     fin_df= pd.DataFrame({'eps': eps,'eps Growth': epsGrowth,'net Income': netIncome,'shareholder Equity': shareholderEquity,'roa':
@@ -42,9 +33,5 @@ def get_financial_report(ticker):
     fin_df.reset_index(inplace=True)
 
     return fin_df
-def get_element(list,element):
-    try:
-        return list[element]
-    except:
-        return '-'
+
 
