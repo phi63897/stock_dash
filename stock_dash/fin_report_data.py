@@ -9,10 +9,10 @@ def get_financial_report(ticker):
     balanceRequest = "stable/stock/{ticker}/balance-sheet?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)
     balanceSheet = request.get(base_url + balanceRequest)["balancesheet"]
 
-    cashRequest = "stable/stock{ticker}/cash-flow?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)"
+    cashRequest = "stable/stock{ticker}/cash-flow?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)
     cashFlow = request.get(base_url + cashRequest)["cashflow"]
 
-    incomeRequest = "stable/stock/{ticker}/income?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)"
+    incomeRequest = "stable/stock/{ticker}/income?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)
     incomeStatement = request.get(base_url+incomeRequest)["income"]
 
     epslist=[]
