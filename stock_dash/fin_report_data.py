@@ -2,7 +2,6 @@ import pandas as pd
 import requests
 from datetime import date
 import os
-
 def get_financial_report(ticker):
     iex_token = os.getenv(iex_token)
     base_url = "https://cloud.iexapis.com/"
@@ -17,11 +16,13 @@ def get_financial_report(ticker):
     incomeStatement = request.get(base_url+incomeRequest)["income"]
 
     epslist=[]
+    totalassetlist = reverse([balanceSheet["totalAssets"] for year in balanceSheet])
     netincomelist = reverse([incomeStatement["netIncome"] for year in incomeStatement])
     longtermdebtlist = reverse([balanceSheet["longTermDebt"] for year in balanceSheet])
     interestincomelist = reverse([incomeStatement["interestIncome"] for year in incomeStatement])
     ebitlist= reverse([incomeStatement["ebit"] for year in incomeStatement])
-
+    equitylist = reverse([balanceSheet["shareholderEquity"] for year in balanceSheet])
+    roalist = [netincomelist[i]/totalassetlist[i] for i in range(len(totalassetlist))]
 
     #get the data from the income statement lists
     #use helper function get_element
@@ -29,7 +30,7 @@ def get_financial_report(ticker):
     epsGrowth = get_element(epslist,1)
     netIncome = get_element(netincomelist,0)
     shareholderEquity = get_element(equitylist,0)
-    roa = get_element(equitylist,1)
+    roa = get_element(roalist,0)
     longtermDebt = get_element(longtermdebtlist,0)
     interestIncome =  get_element(interestincomelist,0)
     ebit = get_element(ebitlist,0)
@@ -46,3 +47,4 @@ def get_element(list,element):
         return list[element]
     except:
         return '-'
+
