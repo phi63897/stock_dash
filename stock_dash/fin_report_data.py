@@ -15,7 +15,7 @@ def get_financial_report(ticker):
     incomeRequest = "stable/stock/{ticker}/income?period=annual&last=5&token={token}".format(ticker=ticker, token = iex_token)
     incomeStatement = request.get(base_url+incomeRequest)["income"]
 
-    epslist=[]
+    epslist=[None * 5]
     totalassetlist = reverse([balanceSheet["totalAssets"] for year in balanceSheet])
     netincomelist = reverse([incomeStatement["netIncome"] for year in incomeStatement])
     longtermdebtlist = reverse([balanceSheet["longTermDebt"] for year in balanceSheet])
