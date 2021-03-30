@@ -25,8 +25,7 @@ from tweet_data import get_options_flow
 from fin_report_data import get_financial_report 
 
 #Connect to sqlite database
-twitConn = sqlite3.connect('stocks.sqlite')
-redditConn = sqlite3.connect('reddit.sqlite')
+conn = sqlite3.connect('stocks.sqlite')
 #instantiate dash app server using flask for easier hosting
 server = Flask(__name__)
 app = dash.Dash(__name__,server = server ,meta_tags=[{ "content": "width=device-width"}], external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -35,10 +34,10 @@ server.wsgi_app = WhiteNoise(server.wsgi_app, root='static/')
 app.config.suppress_callback_exceptions = True
 #get options flow from twitter
 get_options_flow()
-flow = pd.read_sql("select datetime, text from tweets order by datetime desc", twitConn)
+flow = pd.read_sql("select datetime, text from tweets order by datetime desc", conn)
 #get reddit data
 get_reddit()
-top_post = pd.read_sql("select title, score, post from reddit order by score desc", redditConn)
+top_post = pd.read_sql("select title, score, post from reddit order by score desc", conn)
 
 #creating dash layout
 layout1 = html.Div([
@@ -151,8 +150,8 @@ def refresh_cards(ticker):
      Input('interval-component3', 'n_intervals')])
 def update_table(page_current, page_size, sort_by, filter, n_clicks):
     filtering_expressions = filter.split(' && ')
-    redditConn = sqlite3.connect('reddit.sqlite')
-    dff = pd.read_sql("select title, score, post from reddit order by score desc", redditConn)
+    conn = sqlite3.connect('stocks.sqlite')
+    dff = pd.read_sql("select title, score, post from reddit order by score desc", conn)
     for filter_part in filtering_expressions:
         col_name, operator, filter_value = split_filter_part(filter_part)
     if operator in ('eq', 'ne', 'lt', 'le', 'gt', 'ge'):
@@ -187,8 +186,8 @@ def update_table(page_current, page_size, sort_by, filter, n_clicks):
     ])
 def update_table2(page_current, page_size, sort_by, filter, n):
     filtering_expressions = filter.split(' && ')
-    twitConn = sqlite3.connect('stocks.sqlite')
-    dff = pd.read_sql("select datetime, text, source from tweets order by datetime desc", twitConn)
+    conn = sqlite3.connect('stocks.sqlite')
+    dff = pd.read_sql("select datetime, text, source from tweets order by datetime desc", conn)
     for filter_part in filtering_expressions:
         col_name, operator, filter_value = split_filter_part(filter_part)
         if operator in ('eq', 'ne', 'lt', 'le', 'gt', 'ge'):
