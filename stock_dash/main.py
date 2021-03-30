@@ -64,7 +64,7 @@ dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-inpu
                 n_intervals=0)
           , dcc.Interval(
                 id='interval-component4',
-                interval=1*60000, # in milliseconds
+                interval=1*80000, # in milliseconds
                 n_intervals=0)  
                 ])#end col
         ])#end row           
@@ -151,7 +151,8 @@ def refresh_cards(ticker):
 def update_table(page_current, page_size, sort_by, filter, n_clicks):
     filtering_expressions = filter.split(' && ')
     conn = sqlite3.connect('stocks.sqlite')
-    dff = pd.read_sql("select title, score, post from reddit order by score desc", conn)
+    top_post = pd.read_sql("select title, score, post from reddit order by score desc", conn)
+    dff = top_post
     for filter_part in filtering_expressions:
         col_name, operator, filter_value = split_filter_part(filter_part)
     if operator in ('eq', 'ne', 'lt', 'le', 'gt', 'ge'):
@@ -187,7 +188,8 @@ def update_table(page_current, page_size, sort_by, filter, n_clicks):
 def update_table2(page_current, page_size, sort_by, filter, n):
     filtering_expressions = filter.split(' && ')
     conn = sqlite3.connect('stocks.sqlite')
-    dff = pd.read_sql("select datetime, text, source from tweets order by datetime desc", conn)
+    flow = pd.read_sql("select datetime, text, source from tweets order by datetime desc", conn)
+    dff = flow
     for filter_part in filtering_expressions:
         col_name, operator, filter_value = split_filter_part(filter_part)
         if operator in ('eq', 'ne', 'lt', 'le', 'gt', 'ge'):
