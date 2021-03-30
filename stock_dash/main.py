@@ -50,7 +50,7 @@ dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-inpu
         dbc.Col([                                
                 dbc.Row([make_card("Wallstreet Bets Hot Posts", 'primary'
                 ,[html.P(html.Button('Refresh', id='refresh'))
-                , make_table('table-sorting-filtering', dfr, '17px', 4)])], justify = 'center')
+                , make_table('table-sorting-filtering', dfr, '17px', 4)])])
                 ])
         ,dbc.Col([dbc.Row([dbc.Alert("_Charts_", color="primary")], justify = 'center')
         ,dbc.Row(html.Div(id='x-vol-1'), justify = 'center')
@@ -62,7 +62,6 @@ dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-inpu
                 id='interval-component2',
                 interval=1*60000, # in milliseconds
                 n_intervals=0)      
-        ,dbc.Row([html.Div(id='tweets')])
                 ])#end col
         ])#end row           
 ]) #end div
