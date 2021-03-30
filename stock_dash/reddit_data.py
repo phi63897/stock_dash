@@ -31,4 +31,4 @@ def get_reddit(cid= r_cid, csec= r_csec, uag= r_uag, subreddit='wallstreetbets')
     #save top posts to sqlite database
     posts_df.to_sql('reddit', conn, if_exists = 'replace')
     
-    return print('done')
+    return print('reddit done')
