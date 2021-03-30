@@ -71,7 +71,7 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
             '''
         }],
         columns=[
-            {"name": i, "id": i, "presentation"='markdown'} for i in dataframe.columns
+            {"name": i, "id": i} for i in dataframe.columns
         ],
         style_header={
             'backgroundColor': 'rgb(230, 230, 230)',
