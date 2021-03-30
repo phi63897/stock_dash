@@ -71,15 +71,12 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
             style_data={
                 'whiteSpace': 'normal',
                 'height': 'auto',
-                'lineHeight': lineHeight
+                'maxHeight' 34,
+                'lineHeight': lineHeight,
+                'overflow': 'hidden',
+                'textOverflow': 'ellipsis',
+                'maxWidth': 0
             },
-        style_data={
-            'overflow': 'hidden',
-            'textOverflow': 'ellipsis',
-            'maxWidth': 0,
-            'maxHeight': 34,
-            },
-        
         style_data_conditional=[
                 {
                     'if': {'row_index': 'odd'},
