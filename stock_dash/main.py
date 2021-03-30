@@ -43,15 +43,15 @@ dfr = get_reddit()
 layout1 = html.Div([
 dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-input', 'date-picker', 36)))]) #row 1
 ,dbc.Row([dbc.Col([make_card("Twitter Order Flow", 'primary', make_table('table-sorting-filtering2', flow, '17px', 10))])
-        ,dbc.Col([make_card("Fin table ", "secondary", html.Div(id="fin-table"))])
-        ])
-, dbc.Row(id = 'cards')
-, dbc.Row([
-        dbc.Col([                                
+         ,dbc.Col([                                
                 dbc.Row([make_card("Wallstreet Bets Hot Posts", 'primary'
                 ,[html.P(html.Button('Refresh', id='refresh'))
                 , make_table('table-sorting-filtering', dfr, '17px', 4)])])
                 ])
+        ])
+, dbc.Row(id = 'cards')
+, dbc.Row([
+        dbc.Col([make_card("Fin table ", "secondary", html.Div(id="fin-table"))])
         ,dbc.Col([dbc.Row([dbc.Alert("_Charts_", color="primary")], justify = 'center')
         ,dbc.Row(html.Div(id='x-vol-1'), justify = 'center')
         , dcc.Interval(
