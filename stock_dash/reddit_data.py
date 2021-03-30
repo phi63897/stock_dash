@@ -16,7 +16,10 @@ def get_reddit(cid= r_cid, csec= r_csec, uag= r_uag, subreddit='wallstreetbets')
     #load the posts into a pandas dataframe
     p = []
     for post in posts:
-        p.append([post.title, post.score, post.url])
-    posts_df = pd.DataFrame(p,columns=['title', 'score', 'url'])
+        if post.selftext != "":
+            p.append([post.title, post.score, post.selftext])
+        else:
+            p.append([post.title, post.score, post.url])
+    posts_df = pd.DataFrame(p,columns=['title', 'score', 'post'])
     
     return posts_df
