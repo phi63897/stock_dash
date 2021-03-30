@@ -45,6 +45,7 @@ dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-inpu
 ,dbc.Row([dbc.Col([make_card("Twitter Order Flow", 'primary', make_table('table-sorting-filtering2', flow, '17px', 10))])
         ,dbc.Col([make_card("Fin table ", "secondary", html.Div(id="fin-table"))])
         ])
+, dbc.Row(id = 'cards')
 , dbc.Row([
         dbc.Col([                                
                 dbc.Row([make_card("Wallstreet Bets Hot Posts", 'primary'
