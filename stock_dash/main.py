@@ -48,7 +48,7 @@ dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-inpu
 , dbc.Row([make_card("select ticker", "warning", "select ticker")],id = 'cards') #row 2
 , dbc.Row([
         dbc.Col([                                
-                dbc.Row([make_card("Wallstreet Bets New Posts", 'primary'
+                dbc.Row([make_card("Wallstreet Bets Hot Posts", 'primary'
                 ,[html.P(html.Button('Refresh', id='refresh'))
                 , make_table('table-sorting-filtering', dfr, '17px', 4)])], justify = 'center')
                 ])
