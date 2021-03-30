@@ -63,7 +63,7 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
         css=[{
             'selector': '.row', 
             'rule': '''
-                line-height: 15px;
+                line-height: 17px;
                 max-height: 34px; min-height: 34px; height: 34px;
                 display: block;
                 overflow-y: hidden;
@@ -71,7 +71,7 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
             '''
         }],
         columns=[
-            {"name": i, "id": i} for i in dataframe.columns
+            {"name": i, "id": i, "presentation"='markdown'} for i in dataframe.columns
         ],
         style_header={
             'backgroundColor': 'rgb(230, 230, 230)',
@@ -93,6 +93,8 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
             'width': '500px'},
             {'if': {'column_id': 'datetime'},
             'width': '130px'},
+            {'if': {'column_id': 'url'},
+            'width': '500px'},
             {'if': {'column_id': 'text'},
             'width': '500px'}],
         page_current=0,
