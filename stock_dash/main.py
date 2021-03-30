@@ -58,14 +58,6 @@ dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-inpu
                 id='interval-component2',
                 interval=1*60000, # in milliseconds
                 n_intervals=0)  
-         ''', dcc.Interval(
-                id='interval-component3',
-                interval=1*150000, # in milliseconds
-                n_intervals=0)
-          , dcc.Interval(
-                id='interval-component4',
-                interval=1*80000, # in milliseconds
-                n_intervals=0)  '''
                 ])#end col
         ])#end row           
 ]) #end div
