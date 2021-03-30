@@ -63,6 +63,7 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
         css=[{
             'selector': '.row', 
             'rule': '''
+                line-height: 15px;
                 max-height: 34px; min-height: 34px; height: 34px;
                 display: block;
                 overflow-y: hidden;
@@ -78,7 +79,6 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
             style_cell={'textAlign': 'left'},
             style_data={
                 'whiteSpace': 'normal',
-                'lineHeight': lineHeight,
             },
         style_data_conditional=[
                 {
