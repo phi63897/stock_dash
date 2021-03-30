@@ -60,16 +60,7 @@ def make_item(button, cardbody, i):
 def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
     return   dash_table.DataTable(
         id=id,
-        css=[{
-            'selector': '.row', 
-            'rule': '''
-                line-height: 17px;
-                max-height: 34px; min-height: 34px; height: 34px;
-                display: block;
-                overflow-y: hidden;
-                margin: 0;
-            '''
-        }],
+        css=[{'selector': '.row', 'rule': 'margin: 0'}],
         columns=[
             {"name": i, "id": i} for i in dataframe.columns
         ],
@@ -79,7 +70,14 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
             style_cell={'textAlign': 'left'},
             style_data={
                 'whiteSpace': 'normal',
+                'height': 'auto',
+                'lineHeight': lineHeight,
             },
+        style_table={
+            'maxHeight': '700px'
+            ,'overflowY': 'scroll'
+        },
+        
         style_data_conditional=[
                 {
                     'if': {'row_index': 'odd'},
