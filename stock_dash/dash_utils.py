@@ -70,8 +70,7 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
             style_cell={'textAlign': 'left'},
             style_data={
                 'whiteSpace': 'normal',
-                'height': 'auto',
-                'maxHeight': 34,
+                'height': '34',
                 'lineHeight': lineHeight,
                 'overflow': 'hidden',
                 'textOverflow': 'ellipsis',
