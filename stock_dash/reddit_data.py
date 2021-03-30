@@ -10,7 +10,7 @@ r_uag = os.getenv('reddit_user')
 
 def get_reddit(cid= r_cid, csec= r_csec, uag= r_uag, subreddit='wallstreetbets'):
     #connect to sqlite database
-    conn = sqlite3.connect(reddit.sqlite')
+    conn = sqlite3.connect('reddit.sqlite')
                            
     #connect to reddit
     reddit = praw.Reddit(client_id= cid, client_secret= csec, user_agent= uag)
