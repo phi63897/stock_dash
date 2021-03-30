@@ -73,6 +73,12 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
                 'height': 'auto',
                 'lineHeight': lineHeight
             },
+        style_data={
+            'overflow': 'hidden',
+            'textOverflow': 'ellipsis',
+            'maxWidth': 0,
+            'maxHeight' 34,
+            },
         
         style_data_conditional=[
                 {
