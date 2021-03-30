@@ -16,7 +16,7 @@ def get_reddit(cid= r_cid, csec= r_csec, uag= r_uag, subreddit='wallstreetbets')
     #load the posts into a pandas dataframe
     p = []
     for post in posts:
-        p.append([post.title, post.score, post.selftext])
-    posts_df = pd.DataFrame(p,columns=['title', 'score', 'post'])
+        p.append([post.title, post.score, post.url])
+    posts_df = pd.DataFrame(p,columns=['title', 'score', 'url'])
     
     return posts_df
