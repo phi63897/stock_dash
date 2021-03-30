@@ -12,7 +12,7 @@ def get_reddit(cid= r_cid, csec= r_csec, uag= r_uag, subreddit='wallstreetbets')
     #connect to reddit
     reddit = praw.Reddit(client_id= cid, client_secret= csec, user_agent= uag)
     #get the new reddit posts
-    posts = reddit.subreddit(subreddit).new(limit=None)
+    posts = reddit.subreddit(subreddit).hot(limit=100)
     #load the posts into a pandas dataframe
     p = []
     for post in posts:
