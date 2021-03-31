@@ -74,10 +74,10 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
                 'lineHeight': lineHeight,
             },
         style_table={
-            'minHeight': '500px'
+            'minHeight': '700px'
             ,'maxHeight': '700px'
             ,'overflowY': 'scroll'
-            , 'maxWidth': '900px'
+            , 'maxWidth': '850px'
             ,'overflowX': 'scroll'
         },
         
