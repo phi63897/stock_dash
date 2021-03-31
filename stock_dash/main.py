@@ -125,11 +125,8 @@ def new_tweets(n):
 @app.callback(Output('cards', 'children'),
 [Input('ticker-input', 'value')])
 def refresh_cards(ticker):
-        ticker = ticker.upper()
-        if ticker is None:
-                TICKER = 'MSFT'
-        else:
-                TICKER = yf.Ticker(ticker)
+        ticker = ticker.upper() if ticker!=None else 'MSFT'
+        TICKER = yf.Ticker(ticker)
         
         cards = [ dbc.Col(make_card("Previous Close ", "secondary", TICKER.info['previousClose']))
         , dbc.Col(make_card("Open", "secondary", TICKER.info['open']))
