@@ -219,7 +219,7 @@ def update_table2(page_current, page_size, sort_by, filter, n):
 @app.callback(Output('fin-table', 'children'),
 [Input('ticker-input', 'value')])
 def fin_report(sym):
-    sym = sym.upper()
+    sym = sym.upper() if sym != None else "MSFT"
     df = get_financial_report(sym)
     table = dbc.Table.from_dataframe(df, striped=True
             , bordered=True, hover=True)
