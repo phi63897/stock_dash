@@ -57,6 +57,14 @@ dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-inpu
         , dcc.Interval(
                 id='interval-component2',
                 interval=1*60000, # in milliseconds
+                n_intervals=0)
+        , dcc.Interval(
+                id='interval-component3',
+                interval=1*150000, # in milliseconds
+                n_intervals=0)   
+        , dcc.Interval(
+                id='interval-component4',
+                interval=1*60000, # in milliseconds
                 n_intervals=0)  
                 ])#end col
         ])#end row           
@@ -103,15 +111,14 @@ def new_tweets(n):
         get_options_flow()
         return print("updated twitter")
 
+#callback for refreshing reddit data
 @app.callback(
-    Output('tweets', 'children'),
+    Output('tweets2', 'children'),
     [Input('interval-component4', 'n_intervals'),
 ])
 def new_tweets(n):
         get_reddit()
         return print("updated reddit")
-
-#callback for refreshing reddit data
 
 #callback for loading company cards
 @app.callback(Output('cards', 'children'),
