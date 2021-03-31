@@ -69,7 +69,10 @@ dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-inpu
                 n_intervals=0)  
                 ])#end col
         ])#end row           
-]) #end div
+]
+, style = {"overflowX": "hidden"}
+
+) #end div
 app.layout= layout1
 
 operators = [['ge ', '>='],
