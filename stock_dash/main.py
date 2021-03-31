@@ -41,11 +41,11 @@ top_post = pd.read_sql("select title, score, post from reddit order by score des
 
 #creating dash layout
 layout1 = html.Div([
-dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-input', 'date-picker', 36)))]) #row 1
-,dbc.Row([dbc.Col([make_card("Twitter Order Flow", 'primary', make_table('table-sorting-filtering2', flow, '17px', 10))])
-         ,dbc.Col([make_card("Wallstreet Bets Hot Posts", 'primary', make_table('table-sorting-filtering', top_post, '17px', 4))])
+dbc.Row([dbc.Col([make_card("Twitter Order Flow", 'primary', make_table('table-sorting-filtering2', flow, '17px', 10))])
+         ,dbc.Col([make_card("Wallstreet Bets Top Daily Posts", 'primary', make_table('table-sorting-filtering', top_post, '17px', 4))])
         ],
         no_gutters=True,)#end row
+, dbc.Row([dbc.Col(make_card("Enter Ticker", "success", ticker_inputs('ticker-input', 'date-picker', 36)))]) #row 2
 , dbc.Row(id = 'cards')
 , dbc.Row([
         dbc.Col([make_card("Fin table ", "secondary", html.Div(id="fin-table"))])
