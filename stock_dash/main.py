@@ -241,14 +241,14 @@ def create_graph(ticker,startdate, enddate, n):
                 open=df1['Open'], high=df1['High'],
                 low=df1['Low'], close=df1['Close'])
                       ])
-    df2 = yf.download(ticker, startdate, enddate, period = "5d", interval = "1m")
+    df2 = yf.download(ticker, period = "5d", interval = "1m")
     df2.reset_index(inplace=True)
         
     fig2 = go.Figure(data=[go.Candlestick(x=df2['Datetime'],
                 open=df2['Open'], high=df2['High'],
                 low=df2['Low'], close=df2['Close'])
                       ])
-    df3 = yf.download(ticker,  startdate, enddate, period = "1d", interval = "1m")
+    df3 = yf.download(ticker, period = "1d", interval = "1m")
     df3.reset_index(inplace=True)
         
     fig3 = go.Figure(data=[go.Candlestick(x=df3['Datetime'],
