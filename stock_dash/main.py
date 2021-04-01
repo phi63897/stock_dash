@@ -238,8 +238,9 @@ def fin_report(sym):
 ])
 def create_graph(ticker,startdate, enddate, n):
     ticker = ticker.upper() if ticker != None else "MSFT"
-    startdate = reformatDate(startdate)
-    enddate = reformatDate(enddate)
+    print(startdate)
+#     startdate = reformatDate(startdate)
+#     enddate = reformatDate(enddate)
     df1 = yf.download(ticker,startdate, enddate)
     df1.reset_index(inplace=True)
         
