@@ -108,7 +108,7 @@ def split_filter_part(filter_part):
 #function for fixing date formats to match yfinance input
 def reformatDate(inputDate):
     datePartList = inputDate.split("/")
-    return "-".join([datePartList[2],datePartList[0], datePartList[1])
+    return "-".join([datePartList[2],datePartList[0], datePartList[1]])
 
 #callback for refreshing twitter data
 @app.callback(
@@ -239,8 +239,8 @@ def fin_report(sym):
 def create_graph(ticker,startdate, enddate, n):
     ticker = ticker.upper() if ticker != None else "MSFT"
     print(startdate)
-#     startdate = reformatDate(startdate)
-#     enddate = reformatDate(enddate)
+    startdate = reformatDate(startdate)
+    enddate = reformatDate(enddate)
     df1 = yf.download(ticker,startdate, enddate)
     df1.reset_index(inplace=True)
         
