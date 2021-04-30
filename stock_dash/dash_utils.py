@@ -104,7 +104,7 @@ def make_table(id, dataframe, lineHeight = '17px', page_size = 5):
         page_action='custom',
 filter_action='custom',
         filter_query='',
-sort_action='custom',
+sort_action='custom', 
         sort_mode='multi',
         sort_by=[]
         )#end table
